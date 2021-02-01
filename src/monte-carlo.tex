@@ -122,22 +122,34 @@ Die Funktion wird also mithilfe des arithmetischen Mittels durch eine Gleichvert
 \section{Das Gesetz der großen Zahlen}
 
 Das GGZ besagt, dass ein durch wiederholte Zufallsexperimente generierter Wert ebenfalls eine Zufallsvariable ist.
-Ein Beispiel hierfür ist die Berechnung des arithmetischen Mittels aus $n$ einzelnen generierten Werten.
+Wenn also eine Zufallsvariable $X$ mit $\E(X)=\mu_x$ und $\Var(X)=\sigma_x^2$ gegeben ist, 
+können Zahlen $x_1 \dots x_n \sim X$ i.i.d. gezogen werden. 
+Beispielsweise ist die Summe $S_n$ dieser Zahlen, und auch deren arithmetisches Mittel $\overline{X}_n$ ebenfalls eine Zufallsvariable.
+\begin{align*}
+ S_n &= \sum_{i=1}^n x_i \\
+\overline{X}_n &= \frac{1}{n}\sum^n_{i=1}x_i
+\end{align*}
 
-\[\overline{X}_n = \frac{1}{n}\sum^n_{i=1}X_i\]
+Diese neuen Zufallsvariablen haben einen eigenen Erwartungswert und Varianz:
+\begin{align*}
+\E(S_n) &= n \cdot \mu_x \\
+\Var(S_n) &= n \cdot \sigma_x^2 \\
+\\
+\E(\overline{X}_n) &= \mu_x \\
+\Var(\overline{X}_n) &= \frac{\sigma_x^2}{n}
+\end{align*}
 
-Diese neue Zufallsvariable hat einen eigenen Erwartungswert und eine Varianz:
-
-\[E(\overline{X}_n) = \mu_x\]
-\[Var(\overline{X}_n) = \frac{\sigma}{n}\]
 
 Der Erwartungswert entspricht also dem der ursprünglichen Verteilung und die Varianz sinkt mit steigender Zahl von Zufallsexperimenten.
+Das bedeutet insbesondere, dass der Erwartungswert einer Zufallsvariable durch das arithmetische Mittel von ebenso verteilten Zufallszahlen angenähert werden kann, wenn $n$ nur groß genug ist.
 
 \section{Der zentrale Grenzwertsatz}
 
 Der zentrale Grenzwertsatz besagt, dass der Erwartungswert einer Zufallszahl für große $n$ Normalverteilt:
 
 \[\overline{X}_n \approx N(\mu, \frac{\sigma^2}{n})\]
+bzw.
+\[ \frac{\overline{X}_n -\mu_x}{\sigma_x} \cdot \sqrt{n} \approx N(0,1) \]
 
 Abweichungen des Erwartungswertes können also mit den gleichen Methoden bestimmt und geschätzt werden, wie bei der Normalverteilung.
 Bei solchen Problemstellungen existieren drei Variablen, welche die Genauigkeit beschreiben:
@@ -151,18 +163,15 @@ Bei solchen Problemstellungen existieren drei Variablen, welche die Genauigkeit 
 Wenn in Aufgabenstellungen zwei dieser gegeben sind, ist es möglich die fehlende Variable zu bestimmen:
 
 \begin{align*}
-  \text{Geg.:}
-  &n, \epsilon\\
+  \text{Geg.:} \:  &n, \epsilon\\
   \alpha &\ge 2-2\phi\left(\frac{\epsilon\sqrt{n}}{\sigma}\right)\\
-  \text{Geg.:}
-  &\alpha, \epsilon\\
+  \text{Geg.:} \:  &\alpha, \epsilon\\
   n &\ge \left(Z_{1-\frac{\alpha}{2}}\frac{\sigma}{\epsilon}\right)^2\\
-  \text{Geg.:}
-  &n, \alpha\\
+  \text{Geg.:} \:  &n, \alpha\\
   \epsilon &\ge Z_{1-\frac{\alpha}{2}}\frac{\sigma}{\sqrt{n}}\\
 \end{align*}
 
-Hierbei ist $Z_{1-\frac{\alpha}{2}}$ das Quantil mit dem Wert $1-\frac{\alpha}{2}$.
+Hierbei ist $Z_{1-\frac{\alpha}{2}}$ das Quantil der Standardnormalverteilung mit dem Wert $1-\frac{\alpha}{2}$.
 
 \section{Der Satz von Moivre-Laplace}
 
