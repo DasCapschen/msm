@@ -61,34 +61,55 @@ mit nur zwei komplementären Ausgängen werden. Die Zufallsvariable $X$ gibt an,
 wie oft bei $n$-facher Wiederholung der beliebig, aber fest gewählte Ausgang $A$
 eintritt. Damit kann $X$ die Werte $0, ..., n$ annehmen. Die Wahrscheinlichkeit
 $p$ des Eintretens des gewählten Ausgangs bleibt dabei über alle $n$
-Wiederholunge gleich. Es gilt:
-\[
-P(X=k) = \binom{n}{k}\cdot p^k\cdot(1-p)^{n-k}
-\]
+Wiederholungen gleich. Es gilt:
+\begin{align*}
+P(X=k) &= \binom{n}{k}\cdot p^k\cdot(1-p)^{n-k} \\
+\E(X) &= n \cdot p \\
+\Var(X) &= n \cdot p \cdot (1-p) \\
+\end{align*}
 
 \subsection{Geometrische Verteilung ($Geo(p)$)}
 
 Eine geometrische Verteilung entsteht durch die Wiederholung eines
 Wahrscheinlichkeitsexperiments mit zwei komplementären Ausgängen. Die
 Zufallsvariable $X$ beschreibt die Anzahl an Versuchen, die durchgeführt werden
-müssen, bis der beliebig, aber fest gewählte Ausgang $B$ eintritt.
+müssen, \textbf{bevor} der beliebig, aber fest gewählte Ausgang $B$ eintritt.
 
-Der Zustandsraum von $X$ ist damit $\N_0$. Sei $p$ die Wahrscheinlichkeit, dass
-Ausgang $B$ eintritt. Die Wahrscheinlichkeit, dass nach $k$ Wiederholungen der
-Ausgang $B$ das erste mal auftritt, ist:
+Der Zustandsraum von $X$ ist damit $\N_0$. Sei $p$ die Wahrscheinlichkeit, dass Ausgang $B$ eintritt. 
+Die Wahrscheinlichkeit $k$ Wiederholungen durchzuführen \textbf{bevor} $B$ das erste mal auftritt, ist:
 \[
-P(X=k) = (1-p)^k\cdot p
+P(X=k) = p \cdot (1-p)^k
 \]
+Für Erwartungswert und Varianz gelten:
+\begin{align*}
+\E(X) &= \frac{1-p}{p} \\
+\Var(X) &= \frac{1-p}{p^2}
+\end{align*}
+
+
+Die Zufallsvariable $Y = X+1$ beschreibt die Anzahl an Versuchen für das erste Eintreten von $B$.
+Die Wahrscheinlichkeit, dass $B$ nach $k$ Wiederholungen eintritt, ist:
+\[
+P(Y=k) = p \cdot (1-p)^{k-1}
+\]
+Für Erwartungswert und Varianz gilt:
+\begin{align*}
+\E(Y) &= \frac{1}{p} \\
+\Var(Y) &= \frac{1-p}{p^2}
+\end{align*}
+
 
 \subsection{Poisson-Verteilung ($Poi(\lambda)$)}
 
 Die Poisson-Verteilung entsteht bei Vorgängen, die im Durchschnitt mit
-konstanter Rate $\lambda \in (0, \infty)$ in einem beliebigen, aber
-festen Zeitintervall auftreten. Die Zufallsvariable $X$ beschreibt, wie viele
-Vorgänge tatächlich in dem Zeitintervall aufgetreten sind. Es gilt:
+konstanter Rate $\lambda \in (0, \infty)$ (Einheit: $\frac{1}{\text{Zeiteinheit}}$) 
+in einem beliebigen, aber festen Zeitintervall auftreten. 
+Die Zufallsvariable $X$ beschreibt, wie viele Vorgänge tatsächlich in 
+dem Zeitintervall aufgetreten sind. Es gilt:
 \begin{align*}
 P(X=k) &= \frac{\lambda^k}{k!}\cdot\e^{-\lambda} \\
-\E(X) &= \lambda
+\E(X) &= \lambda \\
+\Var(X) &= \lambda
 \end{align*}
 
 \section{Stetige Verteilungen}
@@ -151,19 +172,26 @@ Intervall von $(a,b)$ auf $1$ und alle anderen Werte auf $0$ abbildet.
 \subsection{Exponentialverteilung ($Exp(\lambda)$)}
 \label{vert-exp}
 
-Für eine Exponentialverteilung mit konstanter Ereignisrate $\lambda>0$ gilt:
+Die Exponentialverteilung wird vorrangig verwendet um die Dauer zufälliger 
+Zeitintervalle zu modellieren. (Lebensdauer, Zeit zwischen 2 Ereignissen)
+Für eine Exponentialverteilung mit konstanter Ereignisrate 
+$\lambda > 0$ (Einheit: $\frac{1}{\text{Zeiteinheit}}$) gilt:
 \begin{align*}
 \rho(x) &= \lambda\cdot \e^{-\lambda x}\cdot\mathbb{I}_{(0, \infty)} \\
-F(z) &= 1 - \e^{-\lambda\cdot z}
+F(z) &= 1 - \e^{-\lambda\cdot z} \\
+\E(X) &= \frac{1}{\lambda} \\
+\Var(X) &= \frac{1}{\lambda^2}
 \end{align*}
 
 \subsection{Normalverteilung ($N(\mu, \sigma^2)$)}
 
 In der Natur kommen Normalverteilungen vor wenn sich eine große Anzahl
 unabhängiger Verteilungen überlagern. Für die Wahrscheinlichkeitsdichte gilt:
-\[
-\rho(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\cdot exp(-\frac{(x-\mu)^2}{2\sigma^2})
-\]
+\begin{align*}
+\rho(x) &= \frac{1}{\sqrt{2\pi\sigma^2}}\cdot exp(-\frac{(x-\mu)^2}{2\sigma^2}) \\
+\E(X) &= \mu \\
+\Var(X) &= \sigma^2
+\end{align*}
 
 \subsection{Standardnormalverteilung ($N(0,1)$)}
 \label{vert-stdnormal}
@@ -180,5 +208,9 @@ Ist $X$ normalverteilt mit $\mu$ und $\sigma^2$, dann ist die Zufallsvariable
 \[
 Z=\frac{X-\mu}{\sigma}
 \]
-
 standardnormalverteilt.
+
+Im Umkehrschluss kann eine standardnormalverteilte Zufallvariable beliebig transformiert werden:
+\[
+X = Z \cdot \sigma + \mu
+\]
